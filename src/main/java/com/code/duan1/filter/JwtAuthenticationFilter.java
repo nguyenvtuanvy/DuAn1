@@ -1,9 +1,8 @@
 package com.code.duan1.filter;
 
-import com.code.duan1.service.JwtService;
+import com.code.duan1.service.jwt.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;

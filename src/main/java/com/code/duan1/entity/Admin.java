@@ -24,7 +24,12 @@ public class Admin implements UserDetails {
     private Long id;
     @Column(name = "user_name",nullable = false,unique = true,length = 50)
     private String username;
+
     private String password;
+
+    @Column(name = "full_name", nullable = false, length = 50)
+    private String fullName;
+
     @Column(name = "role", nullable = false, length = 10)
     private String role;
 

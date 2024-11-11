@@ -10,7 +10,7 @@ import com.code.duan1.payload.request.RegisterRequest;
 import com.code.duan1.payload.response.AuthenticationResponse;
 import com.code.duan1.repository.AdminRepository;
 import com.code.duan1.repository.UserRepository;
-import com.code.duan1.service.JwtService;
+import com.code.duan1.service.jwt.JwtService;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -21,10 +21,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.time.Instant;
-import java.time.ZoneId;
-import java.util.Date;
 
 @Service
 @RequiredArgsConstructor

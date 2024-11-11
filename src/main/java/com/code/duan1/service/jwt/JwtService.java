@@ -1,4 +1,4 @@
-package com.code.duan1.service;
+package com.code.duan1.service.jwt;
 
 import com.code.duan1.exception.RefreshTokenException;
 import io.jsonwebtoken.Claims;
