@@ -32,15 +32,15 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(true);//cho phép sử dụng cookie khi gửi request
-        configuration.addAllowedOrigin("http://localhost:3000");//url của react js
-        configuration.addAllowedOrigin("http://localhost:3030");//url của react js
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","PATCH","DELETE","OPTIONS"));
+        configuration.setAllowCredentials(true);
+        configuration.addAllowedOrigin("http://localhost:3000"); // Chỉ định URL chính xác của frontend
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
 
     @Bean
     public SecurityFilterChain filterChain(@NotNull HttpSecurity http) throws Exception {
@@ -49,9 +49,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
                         auth
+                                .requestMatchers("/", "/home/**").permitAll()
                                 .requestMatchers("/web/**").authenticated()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .anyRequest().permitAll()
+                                .anyRequest().authenticated()
                 )
                 .sessionManagement((sessionManagement) ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -69,4 +70,5 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthorizationFilter, JwtAuthenticationFilter.class);
         return http.build();
     }
+
 }

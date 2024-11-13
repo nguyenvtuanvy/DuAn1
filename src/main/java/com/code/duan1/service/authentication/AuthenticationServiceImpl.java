@@ -35,16 +35,16 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     @Override
     public String registerUser(RegisterRequest request) throws RegisterException {
         try{
-            if (request.getUserName() != null){
-                var user = userRepository.findUserByUsername(request.getUserName());
+            if (request.getUsername() != null){
+                var user = userRepository.findUserByUsername(request.getUsername());
                 if (user.isPresent()){
                     throw new RegisterException("username đã được sử dụng");
                 }
             }
 
             User user = User.builder()
-                    .username(request.getUserName())
-                    .fullName(request.getFullName())
+                    .username(request.getUsername())
+                    .fullName(request.getFullname())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role("USER")
                     .build();
@@ -64,7 +64,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         String refreshToken = null;
 
         Authentication authentication= authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUserName(),request.getPassword())
+                new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword())
         );
 
         if(!(authentication instanceof AnonymousAuthenticationToken)){
@@ -78,6 +78,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         }
 
         return AuthenticationResponse.builder()
+                .username(request.getUsername())
                 .token(token)
                 .refreshToken(refreshToken)
                 .build();

@@ -26,7 +26,7 @@ public class Posts {
     @JoinColumn(name = "admin_id", nullable = false)
     private Admin admin;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title", nullable = false, length = 500)
     private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false)
@@ -34,7 +34,7 @@ public class Posts {
 
     @Lob
     @Column(name = "image", nullable = false)
-    private byte[] image;
+    private String image;
 
     @CreationTimestamp
     @Column(nullable = false)

@@ -22,6 +22,8 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticate(@RequestBody LoginRequest UserLoginRequest){
         try{
+            System.out.println("hello");
+
             return ResponseEntity.status(HttpStatus.OK).body(authenticationService.authenticate(UserLoginRequest));
         } catch (LoginException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
